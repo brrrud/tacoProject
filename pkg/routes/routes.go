@@ -17,7 +17,8 @@ func Initialize(router *gin.Engine, db *pgx.Conn) {
 	//Controller
 	tacoController := controllers.NewTacoController(tacoService)
 
-	router.GET("/byId", tacoController.GetById)
+	router.GET("/byId/:id", tacoController.GetById)
+	router.GET("/byName/:name", tacoController.GetByName)
 	router.POST("/createByProducts", tacoController.CreateTacoByProducts)
 
 }

@@ -21,6 +21,11 @@ func (controller *TacoController) GetById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, product)
 }
 
+func (controller *TacoController) GetByName(ctx *gin.Context) {
+	taco, _ := controller.tacoService.FindByName(ctx.Param("name"))
+	ctx.JSON(http.StatusOK, taco)
+}
+
 func (controller *TacoController) CreateTacoByProducts(ctx *gin.Context) {
 	taco, err := controller.tacoService.CreateTacoByProducts()
 	if err != nil {

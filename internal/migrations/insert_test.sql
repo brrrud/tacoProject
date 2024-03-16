@@ -17,3 +17,5 @@ INSERT INTO taco (name_taco) VALUES ('meat taco');
 INSERT INTO taco (name_taco) VALUES ('super chease taco');
 
 INSERT INTO taco_product VALUES (1, 1), (2, 1), (1, 2);
+
+INSERT INTO taco (name_taco) VALUES ('wow_tacos');
