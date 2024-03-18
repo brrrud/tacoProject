@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5"
 	"net/http"
 	"tacoProject/internal/services"
 )
@@ -22,7 +24,13 @@ func (controller *TacoController) GetById(ctx *gin.Context) {
 }
 
 func (controller *TacoController) GetByName(ctx *gin.Context) {
-	taco, _ := controller.tacoService.FindByName(ctx.Param("name"))
+	/*
+		Пустая структура ответа не является ошибкой
+	*/
+	taco, err := controller.tacoService.FindByName(ctx.Param("name"))
+	if err != nil && !errors.Is(err, pgx.ErrNoRows) {
+		//TODO: лог с сохранением запроса
+	}
 	ctx.JSON(http.StatusOK, taco)
 }
 

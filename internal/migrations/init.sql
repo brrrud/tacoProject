@@ -2,7 +2,6 @@ CREATE TABLE IF NOT EXISTS taco_factory
 (
     id_taco_factory      SERIAL PRIMARY KEY,
     address_taco_factory VARCHAR NOT NULL
-
 );
 
 CREATE TABLE IF NOT EXISTS taco
@@ -24,7 +23,7 @@ CREATE TABLE IF NOT EXISTS product
     id_product     SERIAL PRIMARY KEY,
     name_product   VARCHAR NOT NULL UNIQUE,
     pfc_info_id_fk BIGINT  NOT NULL,
-    weight         DECIMAL NOT NULL,
+    weight_product         DECIMAL NOT NULL,
     CONSTRAINT pfc_info_fk FOREIGN KEY (pfc_info_id_fk) REFERENCES pfc_info (id_pfc_info)
 );
 
@@ -35,4 +34,4 @@ CREATE TABLE taco_product
     CONSTRAINT taco_product_pk PRIMARY KEY (taco_id, product_id)
 );
 
-CREATE INDEX idx_product_name ON product(name_product);
+CREATE INDEX idx_product_name ON taco(name_taco);

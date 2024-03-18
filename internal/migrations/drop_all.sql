@@ -1,4 +1,9 @@
+DROP TABLE IF EXISTS taco_product;
 
-DROP TABLE taco;
-DROP TABLE taco_factory;
-DROP TABLE pfc_info;
+DROP TABLE IF EXISTS product;
+
+DROP TABLE IF EXISTS pfc_info;
+
+DROP TABLE IF EXISTS taco;
+
+DROP TABLE IF EXISTS taco_factory;
