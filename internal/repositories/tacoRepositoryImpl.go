@@ -24,8 +24,6 @@ func (t *TacoRepositoryImpl) FindById(id int64) (models.TacoModel, error) {
 }
 
 func (t *TacoRepositoryImpl) FindByName(nameTaco string) (models.TacoModel, error) {
-	//q := "SELECT id_taco, name_taco FROM taco where name_taco = $1"
-
 	queryForTaco :=
 		` 
 		 SELECT t.id_taco,
@@ -67,7 +65,9 @@ WHERE taco_id = $1
 		var currentProduct string
 		err := rows.Scan(&currentProduct)
 		if err != nil {
-			panic(err)
+			//TODO: Нужно использовать свой тип ошибок в случае если тако существует,
+			//но он пустой(не содержит продуктов)
+			return models.TacoModel{}, err
 		}
 		taco.ProductTacoNames = append(taco.ProductTacoNames, currentProduct)
 	}
