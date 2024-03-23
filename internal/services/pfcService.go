@@ -3,5 +3,5 @@ package services
 import "tacoProject/internal/models"
 
 type PfcInfoService interface {
-	CreateProduct(product models.PfcInfo) error
+	CreateProductPFC(product models.PfcInfo) (int64, error)
 }

@@ -22,9 +22,10 @@ func (controller *PfcInfoController) PostPfcInfo(ctx *gin.Context) {
 		return
 	}
 
-	err := controller.pfcInfoService.CreateProduct(newPfcInfo)
+	pfcInfoId, err := controller.pfcInfoService.CreateProductPFC(newPfcInfo)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create pfcInfo"})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Failed to create pfcInfo"})
 		return
 	}
+	ctx.JSON(http.StatusOK, pfcInfoId)
 }

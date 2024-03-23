@@ -13,13 +13,7 @@ func NewPfcInfoServiceImpl(pfcInfoRepository repositories.PfcInfoRepository) Pfc
 	return &PfcInfoServiceImpl{PfcInfoRepository: pfcInfoRepository}
 }
 
-//func NewPfcInfoService(pfcInfoRepository repositories.PfcInfoRepository) PfcInfoService {
-//	return &PfcInfoService{
-//		PfcInfoRepository: pfcIn,
-//	}
-//}
-
-func (p *PfcInfoServiceImpl) CreateProduct(product models.PfcInfo) error {
-	err := p.PfcInfoRepository.CreatePfcInfo(product)
-	return err
+func (p *PfcInfoServiceImpl) CreateProductPFC(product models.PfcInfo) (int64, error) {
+	pfcInfoId, err := p.PfcInfoRepository.CreatePfcInfo(product)
+	return pfcInfoId, err
 }

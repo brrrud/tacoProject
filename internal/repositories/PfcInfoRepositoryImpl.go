@@ -15,18 +15,19 @@ func NewPfcInfoRepository(Db *pgx.Conn) PfcInfoRepository {
 	return &PfcInfoRepositoryImpl{Db: Db}
 }
 
-func (p *PfcInfoRepositoryImpl) CreatePfcInfo(info models.PfcInfo) error {
+func (p *PfcInfoRepositoryImpl) CreatePfcInfo(info models.PfcInfo) (int64, error) {
 	queryForCreatePfcInfo := `
 	INSERT INTO pfc_info (proteins, fats, carbohydrates)
 	VALUES
-	($1, $2, $3)
+	($1, $2, $3) RETURNING pfc_info.id_pfc_info
 	`
-	_, err := p.Db.Exec(context.Background(), queryForCreatePfcInfo,
+	var returningID int64
+	err := p.Db.QueryRow(context.Background(), queryForCreatePfcInfo,
 		info.Proteins,
 		info.Fats,
-		info.Carbohydrates)
+		info.Carbohydrates).Scan(&returningID)
 	if err != nil {
-		return fmt.Errorf("problem with insert product %w", err)
+		return -1, fmt.Errorf("problem with insert product %w", err)
 	}
-	return nil
+	return returningID, nil
 }
