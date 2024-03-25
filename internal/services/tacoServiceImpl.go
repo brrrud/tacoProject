@@ -9,9 +9,9 @@ type TacoServiceImpl struct {
 	TacoRepository repositories.TacoRepository
 }
 
-func (t *TacoServiceImpl) CreateTacoByProducts() (models.TacoModel, error) {
-	taco, err := t.CreateTacoByProducts()
-	return taco, err
+func (t *TacoServiceImpl) CreateTacoByProducts(request models.RequestForCreateTaco) error {
+	err := t.TacoRepository.CreateTacoByProducts(request)
+	return err
 }
 
 func (t *TacoServiceImpl) FindById(id int64) (models.TacoModel, error) {

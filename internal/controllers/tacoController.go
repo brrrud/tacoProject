@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5"
 	"net/http"
+	"tacoProject/internal/models"
 	"tacoProject/internal/services"
 )
 
@@ -35,10 +36,16 @@ func (controller *TacoController) GetByName(ctx *gin.Context) {
 }
 
 func (controller *TacoController) CreateTacoByProducts(ctx *gin.Context) {
-	taco, err := controller.tacoService.CreateTacoByProducts()
-	if err != nil {
+	var newTacoRequest models.RequestForCreateTaco
+	if err := ctx.ShouldBindJSON(&newTacoRequest); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(http.StatusOK, taco)
+	err := controller.tacoService.CreateTacoByProducts(newTacoRequest)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.Status(http.StatusOK)
 
 }

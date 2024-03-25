@@ -24,6 +24,7 @@ func Initialize(router *gin.Engine, db *pgx.Conn) {
 
 	router.GET("/byId/:id", tacoController.GetById)
 	router.GET("/byName/:name", tacoController.GetByName)
+
 	router.POST("/createByProducts", tacoController.CreateTacoByProducts)
 	router.POST("/createPFC", pfcInfoController.PostPfcInfo)
 	router.POST("/createProduct", productController.PostProduct)
