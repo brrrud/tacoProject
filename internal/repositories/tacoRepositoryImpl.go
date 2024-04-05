@@ -129,5 +129,8 @@ func (t *TacoRepositoryImpl) CreateTacoByProducts(request models.RequestForCreat
 		return fmt.Errorf("couldn't commit transaction: \n%w", err)
 	}
 	return nil
+}
 
+func (t *TacoRepositoryImpl) GetTacosLessThanPFC(pfcSum float64) ([]models.TacoModel, error) {
+	return nil, nil
 }
